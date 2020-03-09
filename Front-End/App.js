@@ -19,25 +19,62 @@ import SigninScreen from './src/screens/SigninScreen';
 import SignupScreen from './src/screens/SignupScreen';
 import TrackCreateScreen from './src/screens/TrackCreateScreen';
 
+import Icon from '@expo/vector-icons/FontAwesome5'
+import SiginScreen from './src/screens/SigninScreen';
 
 
-const switchNavigator = createSwitchNavigator({
-  ResolveAuthScreen:ResolveAuthScreen,
-  loginFlow: createStackNavigator({
-    Signin: SigninScreen,
-    Signup: SignupScreen
-  }),
-  mainFlow: createBottomTabNavigator({
-    Track: createStackNavigator({
-      TrackList: TrackListScreen,
-      TrackDetail: TrackDetailScreen
-    }),
-    Create: TrackCreateScreen,
-    Account: AccountScreen,
-  })
+
+const loginFlow = createStackNavigator({
+  Signin: SigninScreen,
+  Signup: SignupScreen
 });
 
-const App = createAppContainer(switchNavigator);
+const trackFlow = createStackNavigator({
+  TrackList: TrackListScreen,
+  TrackDetail: TrackDetailScreen,
+});
+
+const rootFlow = createBottomTabNavigator(
+  { 
+  Track:trackFlow, 
+  Create:TrackCreateScreen,
+  Account:AccountScreen
+  },
+  {
+    defaultNavigationOptions: ({navigation}) => ({
+      tabBarIcon:({tintColor}) => {
+        let {routeName}=navigation.state;
+        let iconName;
+
+        if(routeName==='Track')
+          iconName='search';
+        
+        else if (routeName==='Create')
+          iconName='plus-circle';
+        else if (routeName==='Account')
+          iconName='user-circle';
+        return (
+          <Icon 
+            color={`${tintColor}`}
+            name={`${iconName}`}
+            size={25}
+            style={{marginTop:5}}
+          />
+        );   
+      },
+    })
+  }
+  
+)
+
+const rootNavigator = createSwitchNavigator({
+  ResolveAuthScreen,
+  loginFlow,
+  rootFlow,
+})
+
+
+const App = createAppContainer(rootNavigator);
 
 
 export default () => {

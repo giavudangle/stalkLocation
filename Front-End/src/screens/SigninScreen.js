@@ -20,7 +20,7 @@ const SiginScreen = () => {
       />
       <Spacer/>
       <AuthForm
-        headerText="Sign in to Account"
+        headerText="Login"
         errorMessage={state.errorMessage}
         onSubmit={signin}
         submitButtonText="Sign In"

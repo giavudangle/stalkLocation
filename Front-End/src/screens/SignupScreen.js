@@ -9,6 +9,7 @@ import NavLink from '../components/NavLink';
 
 import { Context as AuthContext } from '../context/AuthContext';
 import { navigationEvents, NavigationEvents } from 'react-navigation';
+import Spacer from '../components/Spacer';
 
 
 
@@ -17,12 +18,13 @@ const SignupScreen = ({ navigation }) => {
 
 
   return (
-    <View style={styles.container}>
+    <View>
+      <Spacer/>
       <NavigationEvents
         onWillBlur={clearErrorMessage}
       />
       <AuthForm
-        headerText="Sign up for new User"
+        headerText="Sign up "
         errorMessage={state.errorMessage}
         submitButtonText="Sign up"
         onSubmit={signup}

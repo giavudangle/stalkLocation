@@ -4,6 +4,8 @@ import { Text, Button, Input } from 'react-native-elements';
 import { StyleSheet, View } from 'react-native';
 
 import Spacer from './Spacer';
+import Icon from '@expo/vector-icons/AntDesign'
+
 
 const AuthForm = ({ headerText, errorMessage, onSubmit, submitButtonText }) => {
   const [email, setEmail] = useState('');
@@ -11,8 +13,11 @@ const AuthForm = ({ headerText, errorMessage, onSubmit, submitButtonText }) => {
   return (
     <>
       <Spacer>
-        <Text h3>{headerText}</Text>
+        <Text style={styles.header}>{headerText}</Text>
       </Spacer>
+      <Icon name="fork" style={styles.icon}/>
+      <Spacer/>
+
       <Spacer>
         <Input
           label="Email"
@@ -37,6 +42,7 @@ const AuthForm = ({ headerText, errorMessage, onSubmit, submitButtonText }) => {
         <Button
           title={submitButtonText}
           onPress={() => onSubmit({ email, password })}
+          buttonStyle={styles.buttonStyle}
         />
       </Spacer>
     </>
@@ -50,6 +56,22 @@ const styles = StyleSheet.create({
     marginLeft: 50,
     color: 'red',
   },
+  header:{
+    fontSize:30,
+    alignSelf:'center',
+    marginBottom:30
+  },
+  icon:{
+    alignSelf:'center',
+    fontSize:50
+  },
+  buttonStyle:{
+    backgroundColor:'#5885ed',
+    borderRadius:30,
+    width:200,
+    height:50,
+    alignSelf:'center'
+  }
 });
 
 export default AuthForm;
