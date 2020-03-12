@@ -1,33 +1,51 @@
-//import _mockLocation from '../_mockLocation'
 
-import React, { useContext } from 'react';
+//import _mockLocation from '../_mockLocation'
+import React, { useContext, useCallback } from 'react';
 import { StyleSheet } from 'react-native';
 import { Text } from 'react-native-elements';
 import { SafeAreaView,withNavigationFocus } from 'react-navigation';
 
+import Icon from '@expo/vector-icons/FontAwesome'
 
 import Map from '../components/Map';
+
 import Spacer from '../components/Spacer';
+import TrackForm from '../components/TrackForm';
 
 import { Context as LocationContext } from '../context/LocationContext';
 import useLocation from '../hooks/useLocation';
 
 const TrackCreateScreen = ({isFocused}) => {
-  const { addLocation } = useContext(LocationContext);
-  const [err]= useLocation(isFocused,addLocation);
+  const { 
+    state:{
+      recording
+    },
+    addLocation } = useContext(LocationContext);
+
+  const callback=useCallback(location => {
+    
+    addLocation(location,recording);
+  },[recording]);
+  
+  const [err] = useLocation(isFocused,callback);
 
   return (
     <SafeAreaView forceInset={{ top: 'always' }}>
-      <Spacer />
-      <Spacer />
+      <Icon name="magic" size={30} style={styles.icon}/>
       <Map />
       {err ? <Text>Please enalbe location services</Text> : null}
+      <TrackForm/>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-
+  icon:{
+    alignSelf:'center',
+    marginTop:12,
+    marginBottom:10,
+    color:'#5885ed'
+  }
 });
 
 export default withNavigationFocus(TrackCreateScreen);
