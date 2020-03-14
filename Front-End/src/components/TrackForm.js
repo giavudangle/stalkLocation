@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Input, Button } from 'react-native-elements';
-import { StyleSheet } from 'react-native';
+import { StyleSheet ,View} from 'react-native';
 
 import Spacer from '../components/Spacer';
 import { Context as LocationContext } from '../context/LocationContext';
@@ -19,6 +19,7 @@ const TrackForm = () => {
  
   //console.log(state.name);
   //console.log(locations.length);
+  //console.log(locations);
   return (
     <>
       <Spacer>
@@ -29,31 +30,34 @@ const TrackForm = () => {
         />
         
       </Spacer>
-      {
-      recording 
-      ? 
-        <Button
-          title="Stop"
-          buttonStyle={styles.buttonStyle}
-          onPress={stopRecording}
-        />
-      :
-        <Button
-          title="Start Stalk"
-          buttonStyle={styles.buttonStyle}
-          onPress={startRecording}
-        />
-      }
-      
-      {
-        !recording && locations.length
-        ?<Button 
-          title="Save Recording"
-          buttonStyle={styles.saveStyle} 
-          onPress={saveTrack}
-         />
-        :null
-      }
+      <View style={styles.container}>
+        {
+        recording 
+        ? 
+          <Button
+            title="Stop"
+            buttonStyle={styles.stopStyle}
+            onPress={stopRecording}
+          />
+        :
+          <Button
+            title="Start "
+            buttonStyle={styles.startStyle}
+            onPress={startRecording}
+          />
+        }
+        
+        {
+          !recording && locations.length
+          ?<Button 
+            title="Save "
+            buttonStyle={styles.submitStyle} 
+            onPress={saveTrack}
+            
+          />
+          :null
+        }
+      </View>
      
     </>
   );
@@ -61,22 +65,32 @@ const TrackForm = () => {
 
 
 const styles = StyleSheet.create({
-  buttonStyle: {
-    backgroundColor: '#5885ed',
+  container:{
+    flexDirection:'row',
+    justifyContent:'space-around'
+  },
+  startStyle: {
+    backgroundColor: `#0097e6`,
     borderRadius: 30,
     width: 150,
-    height: 30,
+    height: 50,
     alignSelf: 'center',
   },
-  saveStyle:{
-    backgroundColor: '#62bf37',
-    marginTop:10,
-    borderRadius:50,
+  submitStyle: {
+    backgroundColor: `#4cd137`,
+    borderRadius: 30,
     width: 150,
-    height: 30,
-    alignSelf:'center'
-    
-  }
+    height: 50,
+    alignSelf: 'center',
+  },
+  stopStyle: {
+    backgroundColor: `#c23616`,
+    borderRadius: 30,
+    width: 150,
+    height: 50,
+    alignSelf: 'center',
+  },
+ 
 })
 
 export default TrackForm;

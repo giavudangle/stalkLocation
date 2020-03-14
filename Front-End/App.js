@@ -35,7 +35,8 @@ const loginFlow = createStackNavigator({
 const trackFlow = createStackNavigator({
   TrackList: TrackListScreen,
   TrackDetail: TrackDetailScreen,
-});
+  },
+);
 
 const rootFlow = createBottomTabNavigator(
   { 

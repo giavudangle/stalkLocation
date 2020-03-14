@@ -39,6 +39,13 @@ const TrackCreateScreen = ({isFocused}) => {
   );
 }
 
+TrackCreateScreen.navigationOptions = {
+  title:'Add Track',
+}
+
+
+
+
 const styles = StyleSheet.create({
   icon:{
     alignSelf:'center',
