@@ -23,7 +23,7 @@ import SignupScreen from './src/screens/SignupScreen';
 import TrackCreateScreen from './src/screens/TrackCreateScreen';
 
 import Icon from '@expo/vector-icons/FontAwesome5'
-import SiginScreen from './src/screens/SigninScreen';
+
 
 
 
