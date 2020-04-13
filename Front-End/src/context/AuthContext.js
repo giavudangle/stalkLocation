@@ -87,4 +87,4 @@ export const { Provider, Context } = createDataContext(
   authReducer,
   { signup, signin, signout, clearErrorMessage, tryLocalSignin },
   { token: null, errorMessage: '' }
-);
+); 
